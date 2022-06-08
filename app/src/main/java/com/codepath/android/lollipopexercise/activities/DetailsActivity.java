@@ -1,5 +1,6 @@
 package com.codepath.android.lollipopexercise.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.codepath.android.lollipopexercise.R;
 import com.codepath.android.lollipopexercise.models.Contact;
+
+import org.parceler.Parcels;
 
 public class DetailsActivity extends AppCompatActivity {
     public static final String EXTRA_CONTACT = "EXTRA_CONTACT";
@@ -41,6 +44,14 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        Contact contact = Parcels.unwrap(getIntent().getParcelableExtra("contact"));
+        tvName.setText(contact.getName());
+        tvPhone.setText(contact.getNumber());
+        Glide.with(this).load(contact.getThumbnailDrawable()).into(ivProfile);
+
+
+
         return super.onOptionsItemSelected(item);
     }
 
