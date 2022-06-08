@@ -88,8 +88,18 @@ public class ContactsActivity extends AppCompatActivity {
         contacts.add(0, contact);
         mAdapter.notifyItemInserted(0);
 
+        View.OnClickListener myOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Do something here
+                contacts.remove(0);
+                mAdapter.notifyDataSetChanged();
+            }
+        };
+
         // Displaying a snackbar
         Snackbar.make(rlMainContent,"Contact Added!", Snackbar.LENGTH_LONG)
+                .setAction("UNDO", myOnClickListener)
                 .setActionTextColor(ContextCompat.getColor(ContactsActivity.this, R.color.accent))
                 .setDuration(3000).show(); // Don’t forget to show!
 
